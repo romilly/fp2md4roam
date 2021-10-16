@@ -5,7 +5,6 @@ from hamcrest import assert_that, contains_string, is_not
 from fp2md4roam.convert import convert
 from os.path import join, exists, isfile
 
-# As an end-to-end test, this needs to muck about with the file system.:(
 from fp2md4roam.filing import FSFiler, RoamFileMaker
 
 DATA_DIRECTORY = 'tests/test-data'
@@ -49,7 +48,8 @@ class ConverterTest(TestCase):
     def test_handles_real_map(self):
         test_map = 'BrainRules.mm'
         self.convert_test_map(test_map)
-        check_file_contains('BrainRules.md', '# Brain Rules')
+        check_file_contains('BrainRules.md', '- Brain Rules')
+        check_file_contains('BrainRules.md', '\t\t- Introduction')
 
     @staticmethod
     def convert_test_map(test_map):

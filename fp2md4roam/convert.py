@@ -1,8 +1,6 @@
-from fp2md4roam.author import Author
+from fp2md4roam.author import Author, RawMap
 from fp2md4roam.filing import RoamFileMaker
 from logzero import logger, loglevel, WARN
-
-from fp2md4roam.visitor import RawMap
 
 
 def read(name: str):

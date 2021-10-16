@@ -1,6 +1,6 @@
 <map version="freeplane 1.7.0">
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
-<node TEXT="Brain Rules" FOLDED="false" ID="ID_1442603838" CREATED="1598251262988" MODIFIED="1598254460102" LINK="../Books.mm">
+<node TEXT="Brain Rules" FOLDED="false" ID="ID_1442603838" CREATED="1598251262988" MODIFIED="1634399042976">
 <edge STYLE="bezier" COLOR="#808080" WIDTH="thin" DASH="SOLID"/>
 <richcontent TYPE="DETAILS">
 
@@ -16,7 +16,7 @@
 </html>
 </richcontent>
 <hook NAME="MapStyle">
-    <properties fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#808080ff,#808080ff,#808080ff,#808080ff"/>
+    <properties edgeColorConfiguration="#808080ff,#808080ff,#808080ff,#808080ff,#808080ff" show_note_icons="true" fit_to_viewport="false"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
@@ -70,7 +70,7 @@
 </map_styles>
 </hook>
 <hook NAME="AutomaticEdgeColor" COUNTER="6" RULE="ON_BRANCH_CREATION"/>
-<hook URI="../images/brain-rules.jpg" SIZE="1.0" NAME="ExternalObject"/>
+<hook URI="images/brain-rules.jpg" SIZE="1.0" NAME="ExternalObject"/>
 <node TEXT="Introduction" POSITION="right" ID="ID_1451508430" CREATED="1598176635435" MODIFIED="1598176640620">
 <edge COLOR="#808080"/>
 <node TEXT="Amazing children" ID="ID_1598357245" CREATED="1598179400388" MODIFIED="1598179400388">
@@ -227,7 +227,6 @@
     </p>
   </body>
 </html>
-
 </richcontent>
 <node TEXT="Part 2" ID="ID_794118040" CREATED="1598948246310" MODIFIED="1598966462401" LINK="https://www.youtube.com/watch?v=N9JKc6apR4Q"/>
 <node TEXT="Part 3" ID="ID_1202460982" CREATED="1598954658252" MODIFIED="1598954669859" LINK="https://www.youtube.com/watch?v=uZzv_R_51zw"/>
