@@ -137,3 +137,4 @@ ENV/
 
 .idea/
 
+/tests/test-data/generated/
