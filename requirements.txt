@@ -1,0 +1,6 @@
+coverage==6.0.2
+html2text==2020.1.16
+logzero==1.7.0
+lxml==4.6.3
+PyHamcrest==2.0.2
+six==1.16.0

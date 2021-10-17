@@ -26,13 +26,9 @@ def read(name: str):
 class RoamWriter:
     def __init__(self, filer: RoamFileMaker):
         self.filer = filer
-        self.current_document = None
-        self.has_front_matter = False
-        self.book_chapters = []
-        self.sample_chapters = []
         self.filer.create_dirs()
 
-    def append_text(self, text, depth=0):
+    def append_text(self, text, depth):
         if text is None:
             return
         text = (depth*'\t\t')+text+'\n'
@@ -62,7 +58,7 @@ class RoamWriter:
         self.append_text('\n```\n')
 
     def append_link(self, title, link_text, depth):
-        self.append_text('[%s](%s)' % (title, link_text), depth)
+        self.append_text('- [%s](%s)' % (title, link_text), depth)
 
     def append_bullet(self, title, depth):
         if title is None:
@@ -86,14 +82,14 @@ class Author:
         root = Node(fm.find('node'), raw_map.map_directory())
         document = MarkdownDocument(root.get('TEXT'))
         self.writer.start_markdown_document(document)
-        self.visit_node(root, 0)
+        self.visit_node(root, -1)
         self.writer.finish_document()
 
     def visit_node(self, node: Node, depth: int):
-        self.convert(node, depth)
+        if depth >= 0:
+            self.convert(node, depth)
         for child in node.children():
             self.visit_node(child, depth+1)
-        # self.finish_converting(node)
 
     def convert(self, node: Node, depth: int):
         self.handle_link(node, depth)
@@ -106,22 +102,15 @@ class Author:
             self.writer.append_bullet(title, depth)
             return
         if link_text.startswith('http'):
-            _, extension = os.path.splitext(link_text)
-            extension = extension[1:]
-            if extension in ['jpg', 'jpeg', 'png', 'gif', 'svg']:
-                self.writer.add_image(link_text,
-                                      node.map_directory,
-                                      node.get('TEXT'))
-                return
-            if extension in self.LANGUAGES:
-                language = self.LANGUAGES[extension]
-                code = self.get_code_span(node)
-                self.writer.append_code(code, language)
-                return
-        # if extension == 'md':
-        #     self.writer.append_text(self.read_from_map_link(node))
-        self.writer.append_link(title, link_text, depth)
-        return
+            self.writer.append_link(title, link_text, depth)
+            return
+        _, extension = os.path.splitext(link_text)
+        extension = extension[1:]
+        if extension in self.LANGUAGES:
+            language = self.LANGUAGES[extension]
+            code = self.get_code_span(node)
+            self.writer.append_code(code, language)
+            return
 
     def convert_html_in(self, node: Node, depth: int):
         html = node.map_node.find('richcontent')

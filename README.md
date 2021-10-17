@@ -18,14 +18,7 @@ It's not user-friendly at the moment.
 
 ## Installing
 
-If you are comfortable with GitHub and Python,
-```bash
-git clone https://github.com/romilly/fp2md4roam.git
-cd fp2md4roam
-pip3 install html2text
-pip3 install lxml
-pip3 install logzero
-python3
+
 ```
 
 ```python
