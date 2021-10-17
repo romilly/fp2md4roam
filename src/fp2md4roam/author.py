@@ -93,10 +93,14 @@ class Author:
 
     def convert(self, node: Node, depth: int):
         self.handle_link(node, depth)
-        self.convert_html_in(node, depth)
 
     def handle_link(self, node: Node, depth: int):
         title = node.get('TEXT')
+        if title is None: # check to see if the title is in rich text
+            rich_nodes = node.map_node.findall('richcontent')
+            for element in rich_nodes:
+                if element.get('TYPE') == "NODE":
+                    title = html2text(tostring(element).decode('utf-8'))
         link_text = node.get('LINK')
         if link_text is None:
             self.writer.append_bullet(title, depth)
@@ -111,10 +115,6 @@ class Author:
             code = self.get_code_span(node)
             self.writer.append_code(code, language)
             return
-
-    def convert_html_in(self, node: Node, depth: int):
-        html = node.map_node.find('richcontent')
-        self.writer.add_converted_html(html, depth)
 
     def get_code_span(self, node: Node):
         code = self.read_from_map_link(node)

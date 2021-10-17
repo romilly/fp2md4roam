@@ -33,11 +33,6 @@ def check_file_contains(chapter, *texts):
         assert_that(md, contains_string(text))
 
 
-# def check_file_contains_in_order(chapter, *texts):
-#     md = contents_of_manuscript(chapter)
-#     assert_that(md, contains_string())
-
-
 def check_file_excludes(chapter, *texts):
     md = contents_of_manuscript(chapter)
     for text in texts:
@@ -65,7 +60,8 @@ class ConverterTest(TestCase):
                             '- First branch',
                             '- Second Branch',
                             '\t\t- branch 2.1',
-                            '\t\t- [branch with link](https://www.bbc.co.uk/news)'
+                            '\t\t- [branch with link](https://www.bbc.co.uk/news)',
+                            '- _Third_ branch',
                             )
 
     @staticmethod

@@ -63,7 +63,7 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="2" RULE="ON_BRANCH_CREATION"/>
+<hook NAME="AutomaticEdgeColor" COUNTER="3" RULE="ON_BRANCH_CREATION"/>
 <node TEXT="First branch" POSITION="right" ID="ID_1286532634" CREATED="1634470934254" MODIFIED="1634470940639">
 <edge COLOR="#ff0000"/>
 </node>
@@ -71,6 +71,22 @@
 <edge COLOR="#0000ff"/>
 <node TEXT="branch 2.1" ID="ID_1174149887" CREATED="1634472177951" MODIFIED="1634472197154"/>
 <node TEXT="branch with link" ID="ID_1733037987" CREATED="1634472609562" MODIFIED="1634472683886" LINK="https://www.bbc.co.uk/news"/>
+</node>
+<node POSITION="right" ID="ID_670681126" CREATED="1634473359320" MODIFIED="1634473410132"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      <i>Third</i>&#160;branch
+    </p>
+  </body>
+</html>
+
+</richcontent>
+<edge COLOR="#00ff00"/>
 </node>
 </node>
 </map>
