@@ -27,6 +27,4 @@ def converter():
     target_dir = sys.argv[2]
     convert(map_path, target_dir)
 
-if __name__ == '__main__':
-    converter()
 

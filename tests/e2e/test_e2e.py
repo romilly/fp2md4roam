@@ -8,8 +8,6 @@ from os.path import join, exists, isfile
 
 DATA_DIRECTORY = 'tests/test-data'
 TEST_DIRECTORY = join(DATA_DIRECTORY,'generated')
-MARKDOWN_FILE_DIRECTORY =  join(TEST_DIRECTORY, 'markdown')
-IMAGES = join(MARKDOWN_FILE_DIRECTORY, 'images')
 
 
 def prepare_test_directories():
@@ -18,7 +16,7 @@ def prepare_test_directories():
 
 
 def contents_of_manuscript(file_name):
-    path = join(MARKDOWN_FILE_DIRECTORY, file_name)
+    path = join(TEST_DIRECTORY, file_name)
     if not os.path.exists(path):
         raise ValueError('file %s does not exist' % path)
     with open(path) as file_to_read:
