@@ -1,15 +1,13 @@
 import os
 import shutil
 from unittest import TestCase
-from hamcrest import assert_that, contains_string, is_not, contains_inanyorder
+from hamcrest import assert_that, contains_string, is_not
 from fp2md4roam.convert import convert
 from os.path import join, exists, isfile
 
-from fp2md4roam.filing import FSFiler, RoamFileMaker
 
 DATA_DIRECTORY = 'tests/test-data'
 TEST_DIRECTORY = join(DATA_DIRECTORY,'generated')
-# TEST_DIRECTORY = join(DATA_DIRECTORY,'generated')
 MARKDOWN_FILE_DIRECTORY =  join(TEST_DIRECTORY, 'markdown')
 IMAGES = join(MARKDOWN_FILE_DIRECTORY, 'images')
 
@@ -53,6 +51,11 @@ class ConverterTest(TestCase):
         self.convert_test_map(test_map)
         check_file_excludes('TestMap.md', '-')
 
+    def test_handles_map_with_punctiuation_in_root(self):
+        test_map = 'TestMap2.mm'
+        self.convert_test_map(test_map)
+        check_file_excludes('TestMapwithnewlinesandpunctuation.md', '-')
+
     def test_handles_map_with_branches(self):
         test_map = 'TestMap1.mm'
         self.convert_test_map(test_map)
@@ -62,6 +65,7 @@ class ConverterTest(TestCase):
                             '\t\t- branch 2.1',
                             '\t\t- [branch with link](https://www.bbc.co.uk/news)',
                             '- _Third_ branch',
+                            '- Fourth branch\nHas in-line description'
                             )
 
     @staticmethod

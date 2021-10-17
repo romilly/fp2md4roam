@@ -1,6 +1,6 @@
 <map version="freeplane 1.7.0">
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
-<node TEXT="Test Map One" FOLDED="false" ID="ID_1815351838" CREATED="1634468742555" MODIFIED="1634470933132" STYLE="oval">
+<node TEXT="Test Map&#xa;with newlines - and punctuation!" FOLDED="false" ID="ID_1815351838" CREATED="1634468742555" MODIFIED="1634478611521" STYLE="oval">
 <font SIZE="18"/>
 <hook NAME="MapStyle">
     <properties edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" fit_to_viewport="false"/>
@@ -63,47 +63,6 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="4" RULE="ON_BRANCH_CREATION"/>
-<node TEXT="First branch" POSITION="right" ID="ID_1286532634" CREATED="1634470934254" MODIFIED="1634470940639">
-<edge COLOR="#ff0000"/>
-</node>
-<node TEXT="Second Branch" POSITION="left" ID="ID_1888799854" CREATED="1634471549743" MODIFIED="1634471560190">
-<edge COLOR="#0000ff"/>
-<node TEXT="branch 2.1" ID="ID_1174149887" CREATED="1634472177951" MODIFIED="1634472197154"/>
-<node TEXT="branch with link" ID="ID_1733037987" CREATED="1634472609562" MODIFIED="1634472683886" LINK="https://www.bbc.co.uk/news"/>
-</node>
-<node POSITION="right" ID="ID_670681126" CREATED="1634473359320" MODIFIED="1634473410132"><richcontent TYPE="NODE">
-
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      <i>Third</i>&#160;branch
-    </p>
-  </body>
-</html>
-
-</richcontent>
-<edge COLOR="#00ff00"/>
-</node>
-<node TEXT="Fourth branch" POSITION="left" ID="ID_361145547" CREATED="1634474561841" MODIFIED="1634474611849">
-<edge COLOR="#ff00ff"/>
-<richcontent TYPE="DETAILS">
-
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      Has in-line description
-    </p>
-  </body>
-</html>
-
-</richcontent>
-</node>
+<hook NAME="AutomaticEdgeColor" COUNTER="0" RULE="ON_BRANCH_CREATION"/>
 </node>
 </map>

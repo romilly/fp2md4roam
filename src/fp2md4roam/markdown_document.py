@@ -3,7 +3,6 @@ from io import StringIO
 
 TABLE = str.maketrans('', '', string.punctuation)
 
-
 class MarkdownDocument():
     def __init__(self, title: str):
         self._contents = StringIO()
@@ -22,7 +21,7 @@ class MarkdownDocument():
         # self.append_text('\n\n![%s](%s)%s\n\n' % (node_text, location, decoration))
 
     def file_name(self):
-        file_prefix = self.title.replace(' ','')
+        file_prefix = self.title.translate(TABLE).replace(' ','').replace('\n','')
         return '%s.md' % file_prefix
 
 

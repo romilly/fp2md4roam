@@ -46,17 +46,6 @@ class RoamWriter:
             html_text = html2text(html_raw)
             self.append_text(html_text, depth)
 
-    def add_image(self, link_text, map_directory, node_text):
-        file_source = os.path.join(map_directory, link_text)
-        self.filer.copy_image(file_source, os.path.basename(link_text))
-        self.current_document.append_image_link(node_text,
-                                                self.filer.relative_image_location(link_text))
-
-    def append_code(self, code: str,  language: str):
-        self.append_text('\n\n```%s\n' % language)
-        self.append_text(code)
-        self.append_text('\n```\n')
-
     def append_link(self, title, link_text, depth):
         self.append_text('- [%s](%s)' % (title, link_text), depth)
 
@@ -92,15 +81,14 @@ class Author:
             self.visit_node(child, depth+1)
 
     def convert(self, node: Node, depth: int):
-        self.handle_link(node, depth)
-
-    def handle_link(self, node: Node, depth: int):
         title = node.get('TEXT')
-        if title is None: # check to see if the title is in rich text
-            rich_nodes = node.map_node.findall('richcontent')
-            for element in rich_nodes:
-                if element.get('TYPE') == "NODE":
-                    title = html2text(tostring(element).decode('utf-8'))
+        rich_nodes = node.map_node.findall('richcontent')
+        for element in rich_nodes:
+            if element.get('TYPE') == "NODE":
+                title = html2text(tostring(element).decode('utf-8'))
+                continue
+            if element.get('TYPE') == "DETAILS":
+                title += '\n'+html2text(tostring(element).decode('utf-8'))
         link_text = node.get('LINK')
         if link_text is None:
             self.writer.append_bullet(title, depth)
@@ -108,18 +96,6 @@ class Author:
         if link_text.startswith('http'):
             self.writer.append_link(title, link_text, depth)
             return
-        _, extension = os.path.splitext(link_text)
-        extension = extension[1:]
-        if extension in self.LANGUAGES:
-            language = self.LANGUAGES[extension]
-            code = self.get_code_span(node)
-            self.writer.append_code(code, language)
-            return
-
-    def get_code_span(self, node: Node):
-        code = self.read_from_map_link(node)
-        code_lines = code.split('\n')
-        return '\n'.join(code_lines)
 
     @staticmethod
     def read_from_map_link(node: Node):
