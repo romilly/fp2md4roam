@@ -8,6 +8,7 @@ class FSFiler():
         self.target_directory = target_directory
 
     def write(self, path: str, text: str):
+        self.create_dirs()
         path = self.target_file(path)
         with open(path, 'w') as md:
             md.write(text)
@@ -18,13 +19,4 @@ class FSFiler():
 
     def create_dirs(self):
         os.makedirs(self.target_directory, exist_ok=True)
-
-    def copy_file(self, source_path, target_file_name):
-        target_path = normpath(self.target_file(target_file_name))
-        source_path = normpath(source_path)
-        if source_path == target_path: # pragma: no cover
-            return
-        shutil.copyfile(source_path, target_path)
-
-
 

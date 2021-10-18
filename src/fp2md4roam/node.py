@@ -13,16 +13,3 @@ class Node:
     def get(self, name):
         return self.map_node.get(name)
 
-    def get_attribute(self, name):
-        attributes = self.map_node.xpath('attribute[@NAME="%s"]' % name)
-        if len(attributes) == 0:
-            return None
-        return attributes[0].get('VALUE')
-
-    def icons(self):
-        result = []
-        icons = self.map_node.findall('icon')
-        if len(icons):
-            for icon in icons:
-                result.append(icon.get('BUILTIN'))
-        return result
