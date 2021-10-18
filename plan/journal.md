@@ -5,4 +5,7 @@
 Very primitive version working!
 
 
+## Monday 18 October 2021
+
+Beta version is now packaged with entry point.
 

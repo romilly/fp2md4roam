@@ -59,6 +59,7 @@ class Author:
             self.document.append_link(title, link_text, depth)
             return
 
+
 def convert_html2text(element):
     return html2text(tostring(element).decode('utf-8'))
 

@@ -35,11 +35,6 @@ def check_file_excludes(chapter, *texts):
         assert_that(md, is_not(contains_string(text)))
 
 
-def check_image(image_name):
-    full_image_path = os.path.join(IMAGES, image_name)
-    assert_that(exists(full_image_path) and isfile(full_image_path), 'file <%s> expected but does not exist' % image_name)
-
-
 class ConverterTest(TestCase):
     def setUp(self) -> None:
         prepare_test_directories()
@@ -49,7 +44,7 @@ class ConverterTest(TestCase):
         self.convert_test_map(test_map)
         check_file_excludes('TestMap.md', '-')
 
-    def test_handles_map_with_punctiuation_in_root(self):
+    def test_handles_map_with_punctuation_in_root(self):
         test_map = 'TestMap2.mm'
         self.convert_test_map(test_map)
         check_file_excludes('TestMapwithnewlinesandpunctuation.md', '-')
@@ -65,6 +60,7 @@ class ConverterTest(TestCase):
                             '- _Third_ branch',
                             '- Fourth branch\nHas in-line description'
                             )
+
 
     @staticmethod
     def convert_test_map(test_map):
