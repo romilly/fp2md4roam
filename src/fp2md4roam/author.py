@@ -1,7 +1,7 @@
 import os
 from lxml import etree
 
-from fp2md4roam.filing import RoamFileMaker
+from fp2md4roam.filing import FSFiler
 from fp2md4roam.markdown_document import MarkdownDocument
 from fp2md4roam.node import Node
 from html2text import html2text
@@ -24,7 +24,7 @@ def read(name: str):
 
 
 class RoamWriter:
-    def __init__(self, filer: RoamFileMaker):
+    def __init__(self, filer: FSFiler):
         self.filer = filer
         self.filer.create_dirs()
 
@@ -38,7 +38,7 @@ class RoamWriter:
         self.current_document = document
 
     def finish_document(self):
-        self.filer.file_document(self.current_document.file_name(), self.current_document.contents())
+        self.filer.write(self.current_document.file_name(), self.current_document.contents())
 
     def add_converted_html(self, html, depth):
         if html is not None and len(html):
@@ -63,7 +63,7 @@ class Author:
         'js': 'javascript',
     }
 
-    def __init__(self, filer: RoamFileMaker):
+    def __init__(self, filer: FSFiler):
         self.writer = RoamWriter(filer)
 
     def visit(self, raw_map: RawMap):

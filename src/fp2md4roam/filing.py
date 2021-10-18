@@ -7,7 +7,7 @@ class FSFiler():
     def __init__(self, target_directory: str):
         self.target_directory = target_directory
 
-    def file(self, path: str, text: str):
+    def write(self, path: str, text: str):
         path = self.target_file(path)
         with open(path, 'w') as md:
             md.write(text)
@@ -27,17 +27,4 @@ class FSFiler():
         shutil.copyfile(source_path, target_path)
 
 
-class RoamFileMaker:
-
-    def __init__(self, filer: FSFiler):
-        self.filer = filer
-
-    def file_document(self, file_name: str, text: str):
-        self.filer.file(file_name, text)
-
-    def target_directory(self):
-        return self.filer.target_directory
-
-    def create_dirs(self):
-        self.filer.create_dirs()
 

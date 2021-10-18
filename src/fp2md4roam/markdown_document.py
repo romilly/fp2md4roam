@@ -3,6 +3,7 @@ from io import StringIO
 
 TABLE = str.maketrans('', '', string.punctuation)
 
+
 class MarkdownDocument():
     def __init__(self, title: str):
         self._contents = StringIO()
