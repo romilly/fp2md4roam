@@ -27,13 +27,6 @@ def file_name(title):
 
 
 class Author:
-    LANGUAGES = {
-        'sh': 'bash',
-        'c': 'c',
-        'py': 'python',
-        'js': 'javascript',
-    }
-
     def __init__(self, filer: FSFiler):
         self.filer = filer
         self.document = None
