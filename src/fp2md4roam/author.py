@@ -1,11 +1,15 @@
 import os
 from lxml import etree
+import string
 
 from fp2md4roam.filing import FSFiler
 from fp2md4roam.markdown_document import MarkdownDocument
 from fp2md4roam.node import Node
 from html2text import html2text
 from xml.etree.ElementTree import tostring
+
+
+TABLE = str.maketrans('', '', string.punctuation)
 
 
 class RawMap:
@@ -15,6 +19,11 @@ class RawMap:
 
     def map_directory(self):
         return os.path.split(self.map_location)[0]
+
+
+def file_name(title):
+    file_prefix = title.translate(TABLE).replace(' ','').replace('\n','')
+    return '%s.md' % file_prefix
 
 
 class Author:
@@ -34,7 +43,7 @@ class Author:
         root = Node(fm.find('node'), raw_map.map_directory())
         self.document = MarkdownDocument(root.get('TEXT'))
         self.visit_node(root, -1)
-        self.filer.write(self.document.file_name(), self.document.contents())
+        self.filer.write(file_name(root.get('TEXT')), self.document.contents())
 
     def visit_node(self, node: Node, depth: int):
         if depth >= 0:

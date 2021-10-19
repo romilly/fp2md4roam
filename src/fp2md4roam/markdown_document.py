@@ -1,13 +1,7 @@
-import string
 from io import StringIO
-from html2text import html2text
-from xml.etree.ElementTree import tostring
 
 
-TABLE = str.maketrans('', '', string.punctuation)
-
-
-class MarkdownDocument():
+class MarkdownDocument:
     def __init__(self, title: str):
         self._contents = StringIO()
         self.title = title
@@ -30,9 +24,6 @@ class MarkdownDocument():
         self._contents.close()
         return result
 
-    def file_name(self):
-        file_prefix = self.title.translate(TABLE).replace(' ','').replace('\n','')
-        return '%s.md' % file_prefix
 
 
 
