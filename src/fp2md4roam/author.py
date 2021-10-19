@@ -34,7 +34,7 @@ class Author:
     def visit(self, raw_map: RawMap):
         fm = etree.XML(raw_map.map_contents)
         root = Node(fm.find('node'), raw_map.map_directory())
-        self.document = MarkdownDocument(root.get('TEXT'))
+        self.document = MarkdownDocument()
         self.visit_node(root, -1)
         self.filer.write(file_name(root.get('TEXT')), self.document.contents())
 

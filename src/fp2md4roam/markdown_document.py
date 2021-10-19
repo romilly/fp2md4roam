@@ -2,9 +2,8 @@ from io import StringIO
 
 
 class MarkdownDocument:
-    def __init__(self, title: str):
+    def __init__(self):
         self._contents = StringIO()
-        self.title = title
 
     def append_text(self, text: str):
         self._contents.write(text)
