@@ -1,6 +1,4 @@
 import os
-from os.path import normpath
-import shutil
 
 
 class FSFiler():

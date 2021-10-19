@@ -3,7 +3,7 @@ from lxml import etree
 import string
 
 from fp2md4roam.filing import FSFiler
-from fp2md4roam.markdown_document import MarkdownDocument
+from markdown_builder.document import MarkdownDocument
 from fp2md4roam.node import Node
 from html2text import html2text
 from xml.etree.ElementTree import tostring
@@ -34,7 +34,7 @@ class Author:
     def visit(self, raw_map: RawMap):
         fm = etree.XML(raw_map.map_contents)
         root = Node(fm.find('node'), raw_map.map_directory())
-        self.document = MarkdownDocument()
+        self.document = MarkdownDocument(indentation='\t\t')
         self.visit_node(root, -1)
         self.filer.write(file_name(root.get('TEXT')), self.document.contents())
 
@@ -58,7 +58,7 @@ class Author:
             self.document.append_bullet(title, depth)
             return
         if link_text.startswith('http'):
-            self.document.append_link(title, link_text, depth)
+            self.document.append_bulleted_link(title, link_text, depth)
             return
 
 
