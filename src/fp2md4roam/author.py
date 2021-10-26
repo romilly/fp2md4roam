@@ -63,6 +63,8 @@ class Author:
                 continue
             if element.get('TYPE') == "DETAILS":
                 title += '\n' + convert_html2text(element)
+            if element.get('TYPE') == "NOTE":
+                title += '\n' + convert_html2text(element)
         return title
 
 

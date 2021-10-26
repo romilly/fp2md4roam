@@ -60,9 +60,21 @@ class ConverterTest(TestCase):
                             '- _Third_ branch',
                             '- Fourth branch\nHas in-line description'
                             )
-    def test_converts_real_map(self):
-        test_map = 'talk-plan.mm'
+
+    def test_handles_map_with_rich_text_in_root(self):
+        test_map = 'TestMap3.mm'
         self.convert_test_map(test_map)
+        check_file_contains('TestMapThree.md',
+                            '- First branch')
+
+    def test_handles_map_with_notes(self):
+        test_map = 'TestMap4.mm'
+        self.convert_test_map(test_map)
+        check_file_contains('TestMapFour.md',
+                            '- First branch',
+                            'This is a note')
+
+
 
 
     @staticmethod
