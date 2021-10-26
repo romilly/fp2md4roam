@@ -36,7 +36,7 @@ class Author:
         root = Node(fm.find('node'), raw_map.map_directory())
         self.document = MarkdownDocument(indentation='\t\t')
         self.visit_node(root, -1)
-        self.filer.write(file_name(root.get('TEXT')), self.document.contents())
+        self.filer.write(file_name(self.get_title(root)), self.document.contents())
 
     def visit_node(self, node: Node, depth: int):
         if depth >= 0:
@@ -45,6 +45,16 @@ class Author:
             self.visit_node(child, depth+1)
 
     def convert(self, node: Node, depth: int):
+        title = self.get_title(node)
+        link_text = node.get('LINK')
+        if link_text is None:
+            self.document.append_bullet(title, depth)
+            return
+        if link_text.startswith('http'):
+            self.document.append_bulleted_link(title, link_text, depth)
+            return
+
+    def get_title(self, node):
         title = node.get('TEXT')
         rich_nodes = node.map_node.findall('richcontent')
         for element in rich_nodes:
@@ -53,13 +63,7 @@ class Author:
                 continue
             if element.get('TYPE') == "DETAILS":
                 title += '\n' + convert_html2text(element)
-        link_text = node.get('LINK')
-        if link_text is None:
-            self.document.append_bullet(title, depth)
-            return
-        if link_text.startswith('http'):
-            self.document.append_bulleted_link(title, link_text, depth)
-            return
+        return title
 
 
 def convert_html2text(element):

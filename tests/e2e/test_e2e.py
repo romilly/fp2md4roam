@@ -60,6 +60,9 @@ class ConverterTest(TestCase):
                             '- _Third_ branch',
                             '- Fourth branch\nHas in-line description'
                             )
+    def test_converts_real_map(self):
+        test_map = 'talk-plan.mm'
+        self.convert_test_map(test_map)
 
 
     @staticmethod
