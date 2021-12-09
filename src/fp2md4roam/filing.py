@@ -6,7 +6,7 @@ class FSFiler():
         self.target_directory = target_directory
         os.makedirs(self.target_directory, exist_ok=True)
 
-    def write(self, path: str, text: str):
+    def file(self, path: str, text: str):
         path = self.target_file(path)
         with open(path, 'w') as md:
             md.write(text)

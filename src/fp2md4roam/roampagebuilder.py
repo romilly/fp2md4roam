@@ -18,7 +18,7 @@ def file_name(title):
     return '%s.md' % file_prefix
 
 
-class Author:
+class RoamPageBuilder:
     def __init__(self, filer: FSFiler):
         self.filer = filer
         self.document = None
@@ -27,12 +27,12 @@ class Author:
         fm = etree.XML(map_contents)
         root = fm.find('node')
         self.document = MarkdownDocument(indentation='\t\t')
-        self.visit_node(root, -1)
-        self.filer.write(file_name(self.get_title(root)), self.document.contents())
+        self.visit_node(root, 0)
+        self.filer.file(file_name(self.get_title(root)), self.document.contents())
         self.document.close()
 
     def visit_node(self, node: Element, depth: int):
-        if depth >= 0:
+        if depth > 0:
             self.convert(node, depth)
         for child in node.findall('node'):
             self.visit_node(child, depth+1)

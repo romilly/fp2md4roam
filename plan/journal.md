@@ -13,3 +13,4 @@ Beta version is now packaged with entry point.
 
 Made minor refactorings before merging common code in fp2md
 
+Now uses the same markdown_builder as fp2md
