@@ -9,3 +9,7 @@ Very primitive version working!
 
 Beta version is now packaged with entry point.
 
+## Thursday 09 December 2021
+
+Made minor refactorings before merging common code in fp2md
+

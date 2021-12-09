@@ -37,6 +37,7 @@ class Author:
         self.document = MarkdownDocument(indentation='\t\t')
         self.visit_node(root, -1)
         self.filer.write(file_name(self.get_title(root)), self.document.contents())
+        self.document.close()
 
     def visit_node(self, node: Node, depth: int):
         if depth >= 0:
