@@ -2,9 +2,10 @@ import os
 from lxml import etree
 import string
 
+from lxml.etree import Element
+
 from fp2md4roam.filing import FSFiler
 from markdown_builder.document import MarkdownDocument
-from fp2md4roam.node import Node
 from html2text import html2text
 from xml.etree.ElementTree import tostring
 
@@ -33,19 +34,19 @@ class Author:
 
     def visit(self, raw_map: RawMap):
         fm = etree.XML(raw_map.map_contents)
-        root = Node(fm.find('node'), raw_map.map_directory())
+        root = fm.find('node')
         self.document = MarkdownDocument(indentation='\t\t')
         self.visit_node(root, -1)
         self.filer.write(file_name(self.get_title(root)), self.document.contents())
         self.document.close()
 
-    def visit_node(self, node: Node, depth: int):
+    def visit_node(self, node: Element, depth: int):
         if depth >= 0:
             self.convert(node, depth)
-        for child in node.children():
+        for child in node.findall('node'):
             self.visit_node(child, depth+1)
 
-    def convert(self, node: Node, depth: int):
+    def convert(self, node: Element, depth: int):
         title = self.get_title(node)
         link_text = node.get('LINK')
         if link_text is None:
@@ -57,7 +58,7 @@ class Author:
 
     def get_title(self, node):
         title = node.get('TEXT')
-        rich_nodes = node.map_node.findall('richcontent')
+        rich_nodes = node.findall('richcontent')
         for element in rich_nodes:
             if element.get('TYPE') == "NODE":
                 title = convert_html2text(element)
