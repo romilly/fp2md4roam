@@ -13,15 +13,6 @@ from xml.etree.ElementTree import tostring
 TABLE = str.maketrans('', '', string.punctuation)
 
 
-class RawMap:
-    def __init__(self, map_contents: str, map_location: str):
-        self.map_contents = map_contents
-        self.map_location = map_location
-
-    def map_directory(self):
-        return os.path.split(self.map_location)[0]
-
-
 def file_name(title):
     file_prefix = title.translate(TABLE).replace(' ','').replace('\n','')
     return '%s.md' % file_prefix
@@ -32,8 +23,8 @@ class Author:
         self.filer = filer
         self.document = None
 
-    def visit(self, raw_map: RawMap):
-        fm = etree.XML(raw_map.map_contents)
+    def visit(self, map_contents):
+        fm = etree.XML(map_contents)
         root = fm.find('node')
         self.document = MarkdownDocument(indentation='\t\t')
         self.visit_node(root, -1)
